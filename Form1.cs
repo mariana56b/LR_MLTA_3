@@ -47,10 +47,11 @@ namespace LR_MLTA_3
         private void btnDijkstra_Click(object sender, EventArgs e)
         {
             tbResult.Clear();
-            tbResult.AppendText("             Алгоритм Дейкстри" + Environment.NewLine); 
-            int selectedIndex = cmbStartVertex.SelectedIndex;
-            var distances = graph.Dekstra(selectedIndex); 
-            tbResult.AppendText(graph.PrintDekstra(distances));
+            tbResult.AppendText("             Алгоритм Дейкстри" + Environment.NewLine);
+            int selectedIndex = cmbStartVertex.SelectedIndex; 
+            string selectedVertex = cmbStartVertex.SelectedItem.ToString(); 
+            var distances = graph.Dijkstra(selectedIndex); 
+            tbResult.AppendText(graph.PrintDijkstra(distances, selectedVertex)); 
         }
 
         private void btnFloyd_Click(object sender, EventArgs e)

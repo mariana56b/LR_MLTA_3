@@ -22,8 +22,23 @@ namespace LR_MLTA_3
         {
             edges.Add((from, to, weight));
         }
+        private int MinDistance(int[] dist, bool[] visited)
+        {
+            int minIndex = -1;
+            int minValue = int.MaxValue;
 
-        public int[] Dekstra(int source)
+            for (int i = 0; i < dist.Length; i++)
+            {
+                if (!visited[i] && dist[i] < minValue)
+                {
+                    minValue = dist[i];
+                    minIndex = i;
+                }
+            }
+            return minIndex;
+        }
+
+        public int[] Dijkstra(int source)
         {
             int[] dist = Enumerable.Repeat(int.MaxValue, vertices).ToArray(); 
             bool[] visited = new bool[vertices];
@@ -46,26 +61,11 @@ namespace LR_MLTA_3
 
             return dist;
         }
-        private int MinDistance(int[] dist, bool[] visited)
-        {
-            int minIndex = -1;
-            int minValue = int.MaxValue;
 
-            for (int i = 0; i < dist.Length; i++)
-            {
-                if (!visited[i] && dist[i] < minValue)
-                {
-                    minValue = dist[i];
-                    minIndex = i;
-                }
-            }
-            return minIndex; 
-        }
-
-        public string PrintDekstra(int[] dist)
+        public string PrintDijkstra(int[] dist, string sourceVertex)
         {
             var sb = new StringBuilder();
-            sb.AppendLine("   Найкоротші відстані від вершини a:"); 
+            sb.AppendLine($"   Найкоротші відстані від вершини {sourceVertex}:");
 
             for (int i = 0; i < dist.Length; i++)
             {
@@ -78,7 +78,7 @@ namespace LR_MLTA_3
                     sb.AppendLine($"   До вершини {vertexNames[i]}: {dist[i]}");
                 }
             }
-            return sb.ToString(); 
+            return sb.ToString();
         }
 
         public int[,] Floyd()
